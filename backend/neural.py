@@ -59,6 +59,22 @@ clf.predict(testx)
 print("Training set score: %f" % clf.score(data, kelas))
 
 print("Data masuk kedalam kelas :%d"% clf.predict(dataPredict))
+akurasi = clf.score(data,kelas)*100
+akurasi=int(akurasi)
+kelas=clf.predict(dataPredict)
+kelas=int(kelas)
+if kelas == 1:
+   kelas = '[1] sangat mentah'
+elif kelas == 2:
+   kelas = '[2] agak mentah'
+elif kelas == 3:
+   kelas = '[3] matang'
+elif kelas == 4:
+   kelas = '[4] sangat matang'
+else:
+  kelas = '[5] terlalu matang'
+
+
 
 #print(pandas.DataFrame(clf.predict_proba(testx), columns=clf.classes_))
 

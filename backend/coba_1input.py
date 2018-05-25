@@ -30,7 +30,7 @@ def subrgbgray(rgb,treshold):
                 output[i,j]=rgb[i,j]
     return output
 
-tomat = cv2.imread('input.jpg')
+tomat =  img = cv2.imread("/home/adhan/Projek/sisdas-API/backend/temp" + "img.JPG")
 data=[]
 kernel24 = np.ones((24, 24), np.uint8)
 kernel3 = np.ones((3,3),np.uint8)
@@ -90,27 +90,9 @@ cv2.waitKey()
 # a = np.asarray([[b,g,r]])
 # a.tofile('datatomats.csv',sep=',',format='%10.5f')
 
-myFile=open('input.csv','w', newline='')
-with myFile:
-    writer = csv.writer(myFile)
-    writer.writerows(data)
-
-
-#histogram dengan RGB
-# color = ('b','g','r')
-# for i,cols in enumerate(color):
-#     histr = cv2.calcHist([img],[i],None,[256],[0,256])
-#     print(cols)
-#     for j, his in enumerate(histr):
-#         print(j)
-#         print(histr[j])
-#     plt.plot(histr,color = cols)
-#     plt.xlim([0,256])
-# plt.show()
-# r,g,b=cv2.split(img)
-# print(r)
-# print(g)
-# print(b)
+with open('input', 'wb') as myfile:
+    wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+    wr.writerow(data)
 
 cv2.destroyAllWindows()
 
