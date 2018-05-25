@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, url_for,flash
+from flask import Flask, request, redirect, url_for,flash,render_template
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = '/home/adhan/Projek/sisdas-API/backend/temp'
@@ -28,13 +28,5 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return "Success"
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-    </form>
-    '''
+            return render_template('index.html', berhasil="1")
+    return render_template('index.html')
