@@ -3,6 +3,7 @@ import numpy as np
 #from matplotlib import pyplot as plt
 import glob
 import csv
+import os
 
 def subgraygray (gray1, gray2):
     #catatan ukuran gray 1 dan 2 harus sama dan inten sitas gray2 berupa 0 atau 255 (treshold)
@@ -30,7 +31,8 @@ def subrgbgray(rgb,treshold):
                 output[i,j]=rgb[i,j]
     return output
 
-tomat =  img = cv2.imread("/home/adhan/Projek/sisdas-API/backend/temp" + "img.JPG")
+os.chdir('/home/adhan/Projek/sisdas-API/backend/temp')
+tomat =  img = cv2.imread('img.JPG')
 data=[]
 kernel24 = np.ones((24, 24), np.uint8)
 kernel3 = np.ones((3,3),np.uint8)
@@ -84,15 +86,18 @@ x=[b,g,r,h,s,v]
 data.append(x)
 
 
+
     #cv2.imwrite(imgname, tomat_segmented)
 cv2.waitKey()
 
 # a = np.asarray([[b,g,r]])
 # a.tofile('datatomats.csv',sep=',',format='%10.5f')
 
-with open('input', 'wb') as myfile:
-    wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-    wr.writerow(data)
+myFile=open('predict.csv','wb')
+with myFile:
+    writer = csv.writer(myFile)
+    writer.writerows(data)
+
 
 cv2.destroyAllWindows()
 
