@@ -36,8 +36,8 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             imageProcess(filename)
-            neural.klasifikasi()
-            return render_template('index.html', berhasil="1",value=neural.klasifikasi.akurasi)
+            akurasi,kelas=neural.klasifikasi()
+            return render_template('index.html', berhasil="1",value=akurasi,value2=kelas)
     return render_template('index.html')
 
 
