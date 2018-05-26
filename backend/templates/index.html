@@ -12,7 +12,8 @@
               overflow-x: hidden;
               padding-top: 20px;
             }
-    
+            
+
             /* Control the left side */
             .left {
               left: 0;
@@ -99,7 +100,7 @@
                 -webkit-box-sizing: border-box;
                 -moz-box-sizing: border-box;
                 width: 100%;
-                background: #fff;
+                background: rgb(207, 255, 176);
                 margin-bottom: 4%;
                 border: 1px solid #ccc;
                 padding: 3%;
@@ -154,6 +155,7 @@
                 <p class="subtitle">
                     Tomato's rippnes and weight
                 </p>
+                <p>Classification using neural network multilayer perceptron</p>
     
         </section>
         </div>
@@ -164,6 +166,7 @@
                 <div class="level-item has-text-centered form-style-6">
                     <div>
                         <h1 class="heading">Upload Picture</h1>
+                        <p>File must be 'png' or 'jpg' or 'jpeg'</p>
                         <form method=post enctype=multipart/form-data>
                             <p><input type=file name=file>
                                <input type=submit value=Upload>
@@ -175,6 +178,9 @@
                         <h1 class="heading">Hasil</h1>
                         <p>Akurasi model sebesar: {{ value }} %</p>
                         <p>Gambar masuk kedalam kelas: {{ value2 }}</p>
+                        <p>Berat objek adalah : </div>
+                        <img src="{{ file_url }}"></img>
+    
                     </div>
                 </div>
             </nav>
@@ -189,4 +195,7 @@
     
    
     </body>
+    <footer>
+        <p>&copy; 2018 wr<p>
+      </footer>
     </html>

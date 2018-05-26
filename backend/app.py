@@ -6,7 +6,7 @@ from imageProces import *
 from neural import Neural
 
 UPLOAD_FOLDER = '/home/adhan/Projek/sisdas-API/backend/temp'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'csv'])
+ALLOWED_EXTENSIONS = set([ 'png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -37,7 +37,8 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             imageProcess(filename)
             akurasi,kelas=neural.klasifikasi()
-            return render_template('index.html', berhasil="1",value=akurasi,value2=kelas)
+            link=UPLOAD_FOLDER+filename
+            return render_template('index.html', berhasil="1",value=akurasi,value2=kelas,file_url=link)
     return render_template('index.html')
 
 
