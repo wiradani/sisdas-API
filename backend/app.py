@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, url_for,flash,render_template
+from flask import Flask, request, redirect, url_for,flash,render_template,send_from_directory
 from werkzeug.utils import secure_filename
 #from classification import neural
 from imageProces import *
@@ -38,10 +38,13 @@ def upload_file():
             imageProcess(filename)
             akurasi,kelas=neural.klasifikasi()
             link=UPLOAD_FOLDER+filename
-            return render_template('index.html', berhasil="1",value=akurasi,value2=kelas,file_url=link)
-    return render_template('index.html')
+            return render_template('index.html',filename=filename, berhasil="1",value=akurasi,value2=kelas,file_url=link)
+    return render_template('index.html',)
 
 
+@app.route('/ambil/<filename>', methods=['GET', 'POST'])
+def show_file(filename):
+    return send_from_directory('temp/', filename,as_attachment=True)
 
 if __name__ == "__main__":
     app.run(debug=True)
