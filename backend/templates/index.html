@@ -2,6 +2,7 @@
     <head>
         <title>Tomatos rippnes and wight approx</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <style>
             .split {
               height: 100%;
@@ -141,6 +142,10 @@
             .form-style-6 input[type="button"]:hover{
                 background: #2EBC99;
             }
+            .image-size{
+                width: 50 px;
+                height: 50 px;
+            }
     
             </style>
     </head>
@@ -174,16 +179,21 @@
                     </div>
                 </div>
                 <div class="level-item has-text-centered form-style-6">
-                    <div>
+                    <div class="container">
                         <h1 class="heading">Hasil</h1>
-                        <p>Akurasi model sebesar: {{ value }} %</p>
+                        <div class="call">
+                        <div class="row">
+                        <p>Akurasi model sebesar: {{ value }} % </p>
                         <p>Gambar masuk kedalam kelas: {{ value2 }}</p>
-                        <p>Berat objek adalah : </div>
-    
-                    </div>
-                    <div>
-                        <img src="/ambil/{{ filename }}"></img>
+                        <p>Berat objek adalah : gram</div>
                         </div>
+                        <div class="row">
+                        <div class="image-size">
+                        <img  src="/ambil/{{ filename }}"></img>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </section>
@@ -195,9 +205,11 @@
         </div>
     {% endif %}
     
-   
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
     <footer>
-        <p>&copy; 2018 wr<p>
+        <p class="text-center">&copy; 2018 wr<p>
       </footer>
     </html>
