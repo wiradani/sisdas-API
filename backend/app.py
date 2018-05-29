@@ -3,6 +3,7 @@ from flask import Flask, request, redirect, url_for,flash,render_template,send_f
 from werkzeug.utils import secure_filename
 #from classification import neural
 from imageProces import *
+from size import *
 from neural import Neural
 
 UPLOAD_FOLDER = '/home/adhan/Projek/sisdas-API/backend/temp'
@@ -11,8 +12,9 @@ ALLOWED_EXTENSIONS = set([ 'png', 'jpg', 'jpeg'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-#neural = neural()
+
 neural = Neural()
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -36,9 +38,10 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             imageProcess(filename)
+            berat=sizeObj(filename)
             akurasi,kelas=neural.klasifikasi()
             link=UPLOAD_FOLDER+filename
-            return render_template('index.html',filename=filename, berhasil="1",value=akurasi,value2=kelas,file_url=link)
+            return render_template('index.html',filename=filename, berhasil="1",value=akurasi,value2=kelas,value3=berat,file_url=link)
     return render_template('index.html',)
 
 
