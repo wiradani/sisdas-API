@@ -62,6 +62,7 @@ def imageProcess(filename):
     hue=0
     sat=0
     val=0
+    hit=0
     for i in range(0, row):
         for j in range(0, col):
             b, g, r = tomat_segmented[i,j]
@@ -72,8 +73,12 @@ def imageProcess(filename):
             hue=hue+h
             sat=sat+s
             val=val+v
+            if (g==0 & r==0 & b==0 ):
+                hit=hit+1
 
-
+    
+    hi=(float(hit)/(row*col))
+    to=(1-hi)*100
     b=blue/(row*col)
     g=green/(row*col)
     r=red/(row*col)
@@ -84,7 +89,9 @@ def imageProcess(filename):
         # print(g)
         # print(r)
         # x=[b,g,r]
-    x=[b,g,r,h,s,v]
+    print(hit)
+    print(hi)
+    x=[b,g,r,h,s,v,to]
     data.append(x)
 
 

@@ -3,8 +3,8 @@ from flask import Flask, request, redirect, url_for,flash,render_template,send_f
 from werkzeug.utils import secure_filename
 #from classification import neural
 from imageProces import *
-from size import *
 from neural import Neural
+from regresion import Regresion
 
 UPLOAD_FOLDER = '/home/adhan/Projek/sisdas-API/backend/temp'
 ALLOWED_EXTENSIONS = set([ 'png', 'jpg', 'jpeg'])
@@ -14,6 +14,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 neural = Neural()
+regresion = Regresion()
 
 
 def allowed_file(filename):
@@ -38,8 +39,8 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             imageProcess(filename)
-            berat=sizeObj(filename)
             akurasi,kelas=neural.klasifikasi()
+            berat=regresion.reges()
             link=UPLOAD_FOLDER+filename
             return render_template('index.html',filename=filename, berhasil="1",value=akurasi,value2=kelas,value3=berat,file_url=link)
     return render_template('index.html',)

@@ -13,12 +13,13 @@ class Neural:
     #Read Data
     os.chdir('/home/adhan/Projek/sisdas-API/backend/temp')
     filename = open('datatomat.csv', 'r')
-    names = ['b', 'g', 'r', 'h', 's', 'v', 'Class']
+    names = ['b', 'g', 'r', 'h', 's', 'v', 'Class','pk','berat']
     dataframe = pandas.read_csv(filename, names=names)
 
     namafile = open('predict.csv', 'r')
-    atribut = ['b', 'g', 'r', 'h', 's', 'v']
+    atribut = ['b', 'g', 'r', 'h', 's', 'v','to']
     dataPredict = pandas.read_csv(namafile, names=atribut)
+    dataPredict = dataPredict.drop('to', axis=1)
 
 
     #Split Data
@@ -32,8 +33,8 @@ class Neural:
     testx = test.drop('Class', axis=1)
     testy = test.drop(['b','g','r','h','s','v'], axis=1)
 
-    data = dataframe.drop('Class', axis=1)
-    kelas = dataframe.drop(['b','g','r','h','s','v'], axis=1)
+    data = dataframe.drop(['Class','pk','berat'], axis=1)
+    kelas = dataframe.drop(['b','g','r','h','s','v','pk','berat'], axis=1)
 
 
     #MLP CLassification
@@ -56,7 +57,7 @@ class Neural:
     #clf.fit(trainx, trainy)
     clf.fit(data,kelas)
     #predict data
-    clf.predict(testx)
+    
 
 
     #print score
