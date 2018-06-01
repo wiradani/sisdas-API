@@ -42,7 +42,7 @@ class Neural:
     clf = MLPClassifier(activation='relu', alpha=1e-05, batch_size='auto',
           beta_1=0.9, beta_2=0.999, early_stopping=False,
           epsilon=1e-08, hidden_layer_sizes=(10, 7), learning_rate='adaptive',
-          learning_rate_init=0.001, max_iter=100000, momentum=0.9,
+          learning_rate_init=0.001, max_iter=1000000, momentum=0.9,
           nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
           solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
           warm_start=False)
@@ -69,6 +69,7 @@ class Neural:
     print("Data masuk kedalam kelas :%d"% clf.predict(dataPredict))
     akurasi = clf.score(data,kelas)*100
     akurasi=int(akurasi)
+    akurasi = str(akurasi)+" " + "%"
     kelas=clf.predict(dataPredict)
     kelas=int(kelas)
     if kelas == 1:

@@ -34,7 +34,9 @@ class Regresion:
     print("Mean squared error: %.2f" % mean_squared_error(data,kelas))
     # Explained variance score: 1 is perfect prediction
     print('Variance score: %.2f' % r2_score(data,kelas))
-    berat = float(reg.predict(dataPredict))
-    print(berat)
+    berat = float(reg.predict(dataPredict)-8)
+    berat = format(round(berat,2))
+    str(berat)
+    berat = berat +" "+"gram"
 
     return berat
