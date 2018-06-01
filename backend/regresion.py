@@ -31,12 +31,15 @@ class Regresion:
     reg.fit (data,kelas)
 
     print('Coefficients: \n', reg.coef_)
-    print("Mean squared error: %.2f" % mean_squared_error(data,kelas))
+    mse=mean_squared_error(data,kelas)
     # Explained variance score: 1 is perfect prediction
     print('Variance score: %.2f' % r2_score(data,kelas))
+    score = float(reg.score(data,kelas)*100)
     berat = float(reg.predict(dataPredict)-8)
     berat = format(round(berat,2))
+    score=format(round(score,2))
     str(berat)
     berat = berat +" "+"gram"
+    score = str(score) +" "+"%"
 
-    return berat
+    return berat,score,mse

@@ -64,24 +64,24 @@ class Neural:
     #print("Training set score: %f" % clf.score(trainx, trainy))
     #print("Test set score: %f" % clf.score(testx, testy))
 
-    print("Training set score: %f" % clf.score(data, kelas))
+    #print("Training set score: %f" % clf.score(data, kelas))
 
-    print("Data masuk kedalam kelas :%d"% clf.predict(dataPredict))
+    #print("Data masuk kedalam kelas :%d"% clf.predict(dataPredict))
     akurasi = clf.score(data,kelas)*100
     akurasi=int(akurasi)
     akurasi = str(akurasi)+" " + "%"
     kelas=clf.predict(dataPredict)
     kelas=int(kelas)
     if kelas == 1:
-      kelas = '[1] sangat mentah'
+      kelas = '[1] mentah'
     elif kelas == 2:
-      kelas = '[2] agak mentah'
+      kelas = '[2] setengah matang'
     elif kelas == 3:
-      kelas = '[3] matang'
+      kelas = '[3] cukup matang'
     elif kelas == 4:
-      kelas = '[4] sangat matang'
+      kelas = '[4] matang'
     else:
-      kelas = '[5] terlalu matang'
+      kelas = '[5] sangat matang'
 
     return akurasi,kelas
 

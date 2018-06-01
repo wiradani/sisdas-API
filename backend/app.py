@@ -40,9 +40,9 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             imageProcess(filename)
             akurasi,kelas=neural.klasifikasi()
-            berat=regresion.reges()
+            berat,score,mse=regresion.reges()
             link=UPLOAD_FOLDER+filename
-            return render_template('index.html',filename=filename, berhasil="1",value=akurasi,value2=kelas,value3=berat,file_url=link)
+            return render_template('index.html',filename=filename, berhasil="1",value=akurasi,value2=kelas,value3=berat,value4=score,value5=mse,file_url=link)
     return render_template('index.html',)
 
 
