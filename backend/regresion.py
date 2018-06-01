@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 import os
 import sklearn
+import matplotlib.pyplot as plt
 
 class Regresion:
   def reges(self):
@@ -41,5 +42,13 @@ class Regresion:
     str(berat)
     berat = berat +" "+"gram"
     score = str(score) +" "+"%"
+    # Plot outputs
+    # plt.scatter(data, kelas,  color='black')
+    # plt.plot(data, kelas, color='blue', linewidth=3)
+
+    # plt.xticks(())
+    # plt.yticks(())
+
+    # plt.show()
 
     return berat,score,mse
