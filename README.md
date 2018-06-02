@@ -20,11 +20,6 @@ $ flask run
 $ http://127.0.0.1:5000/
 ```
 
-### neural.py  :
-1. buka terminal
-```
-$ python neural.py
-```
 
 ### Ubah root folder  :
 1. ubah root folder pada app.py dengan path folder yang anda inginkan
