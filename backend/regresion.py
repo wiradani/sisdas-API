@@ -38,10 +38,11 @@ class Regresion:
     score = float(reg.score(data,kelas)*100)
     berat = float(reg.predict(dataPredict)-8)
     berat = format(round(berat,2))
-    score=format(round(score,2))
+    score=format(round(score,1))
     str(berat)
     berat = berat +" "+"gram"
     score = str(score) +" "+"%"
+    mse=format(round(mse,2))
     # Plot outputs
     # plt.scatter(data, kelas,  color='black')
     # plt.plot(data, kelas, color='blue', linewidth=3)
