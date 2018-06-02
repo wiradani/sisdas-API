@@ -1,5 +1,5 @@
 # sisdas-API
-smart system api using flask python to classify tomatos images into different classes
+smart system api using flask python to classify tomatos images into different classes and predict tomato weight usig linear regression
 
 ### jalankan flask  :
 1. masuk kedalam folder backend
@@ -21,6 +21,8 @@ $ http://127.0.0.1:5000/
 ```
 
 
-### Ubah root folder  :
-1. ubah root folder pada app.py dengan path folder yang anda inginkan
-2. ubah root folder pada neural.py dengan path folder data root anda
+### Ubah root folder temp  :
+1. app.py 
+2. neural.py
+3. imageprocess.py
+4. regresion.py

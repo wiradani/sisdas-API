@@ -6,6 +6,7 @@ from imageProces import *
 from neural import Neural
 from regresion import Regresion
 
+#Directory folder temp
 UPLOAD_FOLDER = '/home/adhan/Projek/sisdas-API/backend/temp'
 ALLOWED_EXTENSIONS = set([ 'png', 'jpg', 'jpeg'])
 
@@ -35,17 +36,27 @@ def upload_file():
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
+        #Jika file sukses diupload 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            
+            #Jalankan imageproces.py
+            #ubah image ke csv
             imageProcess(filename)
+
+            #Read csv klasifikasi neural network
             akurasi,kelas=neural.klasifikasi()
+
+            #Read csv regresi berat objek
             berat,score,mse=regresion.reges()
             link=UPLOAD_FOLDER+filename
+
+            #Return tampilkan ke index.html
             return render_template('index.html',filename=filename, berhasil="1",value=akurasi,value2=kelas,value3=berat,value4=score,value5=mse,file_url=link)
     return render_template('index.html',)
 
-
+#Route img hasil upload
 @app.route('/ambil/<filename>', methods=['GET', 'POST'])
 def show_file(filename):
     return send_from_directory('temp/', filename,as_attachment=True)

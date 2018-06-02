@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Tomatos rippnes and wight approx</title>
+        <title>Tomatos ripeness and wight approx</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <style>
@@ -156,7 +156,7 @@
             background-image: url("https://cdn.pixabay.com/photo/2016/02/17/19/26/tomato-1205699_960_720.jpg");
 
              /* Half height */
-            height: 100%; 
+            height: 150%; 
 
              /* Center and scale the image nicely */
              background-position: center;
@@ -183,7 +183,7 @@
                     TOMATS 
                 </p>
                 <p class="subtitle">
-                   Predict Tomato's Rippnes and Weight
+                   Predict Tomato's Ripeness and Weight
                 </p>
             </section>
             </div>
@@ -196,7 +196,7 @@
                     <div class="card-header">Image Upload</div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="exampleInputFile">File must be JPG,PNG,or JEPEG</label>
+                            <label for="exampleInputFile">File must be JPG,JPEG,PNG,or BMP</label>
                             <form method=post enctype=multipart/form-data>
                                 <input type=file name=file type="button" class="btn btn-primary btn-sm"><br>
                                 <br>
@@ -207,15 +207,17 @@
                   </div>
                 {% if berhasil %}
                 <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-                        <img  src="/ambil/{{ filename }}"></img>
+                    <div class="card-header">Image</div>    
+                    <img  src="/ambil/{{ filename }}"></img>
                         <div class="card-body">
                             <div class="form-group">
-                                <p class="card-text">Rippnes Maturity Class : {{value2}} </p>
+                                <p class="card-text">Ripeness Maturity Class : {{value2}} </p>
                                 <p class="card-text">Predicted Weight : {{value3}}</p>
                               </div>
                         </div>
                       </div>
                 <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                    <div class="card-header">System Out</div>
                     <div class="card-body">
                             <table class="table table-responsive table-hover gg">
                                     <thead class="thead-dark table-hover">

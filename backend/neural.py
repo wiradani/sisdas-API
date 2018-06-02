@@ -3,7 +3,7 @@ import numpy
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import Normalizer
 import pandas
-from sklearn.neural_network import MLPClassifier
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import os
 import sklearn
@@ -46,27 +46,9 @@ class Neural:
           nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
           solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
           warm_start=False)
-    # clf = MLPClassifier(activation='relu', alpha=1e-05, batch_size='auto',
-    #       beta_1=0.9, beta_2=0.999, early_stopping=False,
-    #       epsilon=1e-08, hidden_layer_sizes=(10, 7), learning_rate='adaptive',
-    #       learning_rate_init=0.001, max_iter=5000000000, momentum=0.9,
-    #       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
-    #       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
-    #       warm_start=False)
-    #train data
-    #clf.fit(trainx, trainy)
-    clf.fit(data,kelas)
-    #predict data
     
-
-
-    #print score
-    #print("Training set score: %f" % clf.score(trainx, trainy))
-    #print("Test set score: %f" % clf.score(testx, testy))
-
-    #print("Training set score: %f" % clf.score(data, kelas))
-
-    #print("Data masuk kedalam kelas :%d"% clf.predict(dataPredict))
+    clf.fit(data,kelas)
+    
     akurasi = clf.score(data,kelas)*100
     akurasi=int(akurasi)
     akurasi = str(akurasi)+" " + "%"
@@ -82,10 +64,10 @@ class Neural:
       kelas = '[4] matang'
     else:
       kelas = '[5] sangat matang'
+  
 
     return akurasi,kelas
 
 
 
-  #print(pandas.DataFrame(clf.predict_proba(testx), columns=clf.classes_))
 

@@ -85,10 +85,7 @@ def imageProcess(filename):
     h=hue/(row*col)
     s=sat/(row*col)
     v=val/(row*col)
-        # print(b)
-        # print(g)
-        # print(r)
-        # x=[b,g,r]
+       
     print(hit)
     print(hi)
     x=[b,g,r,h,s,v,to]
@@ -96,12 +93,10 @@ def imageProcess(filename):
 
 
 
-        #cv2.imwrite(imgname, tomat_segmented)
+        
     cv2.waitKey()
 
-    # a = np.asarray([[b,g,r]])
-    # a.tofile('datatomats.csv',sep=',',format='%10.5f')
-
+    #Put output to csv file
     myFile=open('predict.csv','wb')
     with myFile:
         writer = csv.writer(myFile)
