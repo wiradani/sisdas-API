@@ -15,7 +15,13 @@ $ export FLASK_APP=app.py
 ```
 $ flask run
 ```
-4. open this url in your browser
+
+4. or start the server on different ip
+```
+$ flask run --host=0.0.0.0
+```
+
+5. open this url in your browser
 ```
 $ http://127.0.0.1:5000/
 ```
