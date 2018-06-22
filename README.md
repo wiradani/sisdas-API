@@ -1,7 +1,15 @@
 # sisdas-API
 smart system api using flask python to classify tomatos images into different classes and predict tomato weight usig linear regression
 
-### Run the server  :
+### Library :
+* flask
+* numpy
+* pandas
+* sklearn
+* matplotlib
+* csv
+
+### Run the web  :
 1. change directory to folder backend
 ```
 $ cd backend

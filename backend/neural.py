@@ -7,6 +7,11 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import os
 import sklearn
+from sklearn.model_selection import KFold
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics.scorer import make_scorer
+from sklearn.model_selection import cross_validate
 
 class Neural:
   def klasifikasi(self):
@@ -26,30 +31,39 @@ class Neural:
     train, test = train_test_split(dataframe, test_size=0.8)
 
 
-    trainx = train.drop('Class', axis=1)
-    trainy = train.drop(['b','g','r','h','s','v'], axis=1)
+    trainx = train.drop(['Class'], axis=1)
+    trainy = train.drop(['b','g','r','h','s','v','pk','berat'], axis=1)
 
 
-    testx = test.drop('Class', axis=1)
-    testy = test.drop(['b','g','r','h','s','v'], axis=1)
+    testx = test.drop(['Class','pk','berat'], axis=1)
+    testy = test.drop(['b','g','r','h','s','v','pk','berat'], axis=1)
 
     data = dataframe.drop(['Class','pk','berat'], axis=1)
     kelas = dataframe.drop(['b','g','r','h','s','v','pk','berat'], axis=1)
 
+    X=data
+    Y=numpy.ravel(kelas)
 
-    #MLP CLassification
-    clf = MLPClassifier(solver='lbfgs', alpha=1e-5,hidden_layer_sizes=(5, 2), random_state=1)
+   
+ 
+    #MLP CLassification backprop
+    #clf = MLPClassifier(solver='lbfgs', alpha=1e-5,hidden_layer_sizes=(5, 2), random_state=1)
     clf = MLPClassifier(activation='relu', alpha=1e-05, batch_size='auto',
           beta_1=0.9, beta_2=0.999, early_stopping=False,
           epsilon=1e-08, hidden_layer_sizes=(10, 7), learning_rate='adaptive',
-          learning_rate_init=0.001, max_iter=1000000, momentum=0.9,
+          learning_rate_init=0.001, max_iter=10000, momentum=0.9,
           nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
           solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
           warm_start=False)
     
     clf.fit(data,kelas)
     
-    akurasi = clf.score(data,kelas)*100
+    #Cross validation check
+    scores = cross_val_score(clf, data, kelas, cv=5)
+    print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+
+    #Ubah ke persen
+    akurasi = scores.mean()*100
     akurasi=int(akurasi)
     akurasi = str(akurasi)+" " + "%"
     kelas=clf.predict(dataPredict)
