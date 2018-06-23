@@ -9,6 +9,11 @@ from sklearn.metrics import mean_squared_error, r2_score
 import os
 import sklearn
 import matplotlib.pyplot as plt
+from sklearn.model_selection import cross_val_predict
+from sklearn import linear_model
+import matplotlib.pyplot as plt
+from sklearn.model_selection import cross_val_score
+
 
 class Regresion:
   def reges(self):
@@ -28,14 +33,34 @@ class Regresion:
     data = dataframe.drop(['b','g','r','h','s','v','Class','berat'], axis=1)
     kelas = dataframe.drop(['b','g','r','h','s','v','Class','pk'], axis=1)
 
+    kelas=numpy.ravel(kelas)
+
+    i=5
+    lr = linear_model.LinearRegression()
+    predicted = cross_val_predict(lr, data, kelas, cv=i)
+
+    y=kelas
+
+    #Cross validation check
+    scores = cross_val_score(lr, data, kelas, cv=i)
+    print("Accuracy regres: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+
+    #PLot
+    fig, ax = plt.subplots()
+    ax.scatter(y, predicted, edgecolors=(0, 0, 0))
+    ax.plot([y.min(), y.max()], [y.min(), y.max()], 'k--', lw=4)
+    ax.set_xlabel('Measured')
+    ax.set_ylabel('Predicted')
+    #jika ingin menampilkan hasil plot
+    #plt.show()
+
     reg = linear_model.LinearRegression()
     reg.fit (data,kelas)
 
-    print('Coefficients: \n', reg.coef_)
+    #cek mean square error
     mse=mean_squared_error(data,kelas)
-    # Explained variance score: 1 is perfect prediction
-    print('Variance score: %.2f' % r2_score(data,kelas))
-    score = float(reg.score(data,kelas)*100)
+    
+    score = scores.mean()*100
     berat = float(reg.predict(dataPredict)-8)
     berat = format(round(berat,2))
     score=format(round(score,1))
@@ -43,13 +68,6 @@ class Regresion:
     berat = berat +" "+"gram"
     score = str(score) +" "+"%"
     mse=format(round(mse,2))
-    # Plot outputs
-    # plt.scatter(data, kelas,  color='black')
-    # plt.plot(data, kelas, color='blue', linewidth=3)
-
-    # plt.xticks(())
-    # plt.yticks(())
-
-    # plt.show()
+   
 
     return berat,score,mse

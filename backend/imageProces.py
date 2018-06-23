@@ -91,9 +91,6 @@ def imageProcess(filename):
     x=[b,g,r,h,s,v,to]
     data.append(x)
 
-
-
-        
     cv2.waitKey()
 
     #Put output to csv file

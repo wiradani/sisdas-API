@@ -43,8 +43,7 @@ class Neural:
 
     X=data
     Y=numpy.ravel(kelas)
-
-   
+ 
  
     #MLP CLassification backprop
     #clf = MLPClassifier(solver='lbfgs', alpha=1e-5,hidden_layer_sizes=(5, 2), random_state=1)
