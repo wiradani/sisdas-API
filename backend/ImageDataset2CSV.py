@@ -35,21 +35,45 @@ imgnames=sorted(glob.glob('Kelas 1/*.JPG'))
 data=[]
 colb=[]
 for imgname in imgnames:
+	## penjelasan -> membuat kernel dengan size 24x24
     kernel24 = np.ones((24, 24), np.uint8)
-    tomat = cv2.imread(imgname)
-    tomat = cv2.resize(tomat, (0,0), fx=0.1, fy=0.1)
-    #cv2.imshow(imgname,tomat)
-    b,g,r = cv2.split( tomat )
-    tomat_segmented = cv2.subtract(r,b)
-    # ret, tomat_segmented = cv2.threshold(tomat_segmented, 63,255,cv2.THRESH_BINARY)
-    ret, tomat_segmented = cv2.threshold(tomat_segmented, 15,255,cv2.THRESH_BINARY)
-    tomat_segmented = cv2.morphologyEx(tomat_segmented, cv2.MORPH_CLOSE, kernel24)
-    tomat_segmented = subrgbgray(tomat, tomat_segmented)
-    #cv2.imshow(imgname,tomat_segmented)
-    #HSV
-    rhsv = cv2.cvtColor(tomat_segmented, cv2.COLOR_BGR2HSV)
 
+	## penjelasan -> membaca image dengan fungsi imread
+    tomat = cv2.imread(imgname)
+
+	## resize ukuran citra tomato dengan pengskalaan menjadi 0.1x0.1
+    tomat = cv2.resize(tomat, (0,0), fx=0.1, fy=0.1)
+
+	## menampilkan citra yang telah di resize
+    cv2.imshow(1_img_resize,tomat)
+
+	## cv2.split membagi image menjadi red greed blue channel yang terpisah
+    b,g,r = cv2.split( tomat )
+
+	## melakukan operasi pengurangan channel red dengan blue
+    tomat_segmented = cv2.subtract(r,b)
+   cv2.imshow(2_img_segmented, tomat_segmented)
+
+	## image di threshold dengan binnary -> image menjadi hitam putih
+    ret, tomat_segmented = cv2.threshold(tomat_segmented, 15,255,cv2.THRESH_BINARY)
+cv2.imshow(3_img_thresh_binary,tomat_segmented)
+
+	## dengan morphology melakukan fungsi close (proses dilasi diiukuti erosi)
+## closing berfungsi untuk mengisi lubang kecil (noise) pada objek / menghaluskan objek
+    tomat_segmented = cv2.morphologyEx(tomat_segmented, cv2.MORPH_CLOSE, kernel24)
+cv2.imshow(4_img_closing,tomat_segmented)
+
+## masuk fungsi untuk memasukan img tomat pada bagian putih di img tomat_segmented
+    tomat_segmented = subrgbgray(tomat, tomat_segmented)
+cv2.imshow(5_img_merge,tomat_segmented)
+
+    #HSV -> convert bgr to hsv
+    rhsv = cv2.cvtColor(tomat_segmented, cv2.COLOR_BGR2HSV)
+cv2.imshow(6_img_hsv,rhsv)
+
+# split img jadi channel h,s,v
     h,s,v = cv2.split(rhsv)
+
     #cv2.imshow(imgname+"HSV", s)
     row, col, ch=tomat_segmented.shape
 
@@ -134,4 +158,5 @@ with myFile:
 # print(b)
 
 cv2.destroyAllWindows()
+
 
